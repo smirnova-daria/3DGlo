@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("burger"),console.log("slider")})();
