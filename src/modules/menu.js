@@ -9,8 +9,11 @@ const menu = () => {
 	}
 
 	menuBtn.addEventListener('click', handleMenu)
-	closeBtn.addEventListener('click', handleMenu)
-	menuItems.forEach(item => item.addEventListener('click', handleMenu))
+	menu.addEventListener('click', e => {
+		if (e.target.tagName === "A") {
+			handleMenu()
+		}
+	})
 }
 
 export default menu

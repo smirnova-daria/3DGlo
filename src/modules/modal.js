@@ -1,7 +1,6 @@
 const modal = () => {
 	const buttons = document.querySelectorAll('.popup-btn')
 	const modal = document.querySelector('.popup')
-	const closeBtn = modal.querySelector('.popup-close')
 	const modalContent = modal.querySelector('.popup-content')
 
 	let count = 0
@@ -14,22 +13,21 @@ const modal = () => {
 				count++
 				modal.style.display = 'block'
 				idInterval = requestAnimationFrame(modalAnimation)
-				if (count <= 38) {
-					modalContent.style.left = count + '%'
+				if (count <= 100) {
+					modalContent.style.opacity = count * 4 + '%'
 				} else {
 					cancelAnimationFrame(idInterval)
-					count = 25
+					count = 100
 				}
 				modalContent.style.transform = 'translateX(100px)'
 			} else {
-				count++
+				count -= 4
 				idInterval = requestAnimationFrame(modalAnimation)
-				if (count <= 50) {
-					modalContent.style.left = count * 2 + '%'
+				if (count >= 0) {
+					modalContent.style.opacity = count / 2 + '%'
 				} else {
 					cancelAnimationFrame(idInterval)
 					modal.style.display = 'none'
-					modalContent.style.left = 0
 					count = 0
 				}
 			}
@@ -44,9 +42,12 @@ const modal = () => {
 			modalAnimation()
 		})
 	})
-	closeBtn.addEventListener('click', () => {
-		isOpen = !isOpen
-		modalAnimation()
+
+	modal.addEventListener('click', e => {
+		if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+			isOpen = !isOpen
+			modalAnimation()
+		}
 	})
 }
 
