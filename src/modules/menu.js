@@ -1,17 +1,16 @@
 const menu = () => {
-	const menuBtn = document.querySelector('.menu')
 	const menu = document.querySelector('menu')
-	const closeBtn = menu.querySelector('.close-btn')
-	const menuItems = menu.querySelectorAll('ul>li>a')
 
 	const handleMenu = () => {
 		menu.classList.toggle('active-menu')
 	}
-
-	menuBtn.addEventListener('click', handleMenu)
-	menu.addEventListener('click', e => {
-		if (e.target.tagName === "A") {
+	document.body.addEventListener('click', e => {
+		if (e.target.closest('.menu') || e.target.matches('menu a')) {
 			handleMenu()
+		} else if (!e.target.closest('menu')) {
+			if (menu.classList.contains('active-menu')) {
+				handleMenu()
+			}
 		}
 	})
 }
