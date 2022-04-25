@@ -14,10 +14,7 @@ const modal = () => {
 				count++
 				modal.style.display = 'block'
 				idInterval = requestAnimationFrame(modalAnimation)
-				if (count <= 20) {
-					modalContent.style.left = count + '%'
-					modalContent.style.top = count * 0.5 + '%'
-				} else if (count <= 38) {
+				if (count <= 38) {
 					modalContent.style.left = count + '%'
 				} else {
 					cancelAnimationFrame(idInterval)
@@ -29,7 +26,6 @@ const modal = () => {
 				idInterval = requestAnimationFrame(modalAnimation)
 				if (count <= 50) {
 					modalContent.style.left = count * 2 + '%'
-					modalContent.style.top = count * 2 + '%'
 				} else {
 					cancelAnimationFrame(idInterval)
 					modal.style.display = 'none'
