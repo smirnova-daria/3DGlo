@@ -1,13 +1,13 @@
 import timer from './modules/timer'
 import menu from './modules/menu'
 import modal from './modules/modal'
-import scroll from './modules/scroll'
+//import scroll from './modules/scroll'
 import validation from './modules/validation'
 import tabs from './modules/tabs'
 
 timer('21 april 2022')
 menu()
 modal()
-scroll()
+//scroll()
 validation()
 tabs()
