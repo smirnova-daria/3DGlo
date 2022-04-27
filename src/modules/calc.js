@@ -33,10 +33,24 @@ const calc = (price = 100) => {
 		total.textContent = totalValue
 	}
 
+	function animateValue(obj, start, end, duration) {
+		let startTimestamp = null;
+		const step = (timestamp) => {
+			if (!startTimestamp) startTimestamp = timestamp;
+			const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+			obj.innerHTML = Math.floor(progress * (end - start) + start);
+			if (progress < 1) {
+				window.requestAnimationFrame(step);
+			}
+		};
+		window.requestAnimationFrame(step);
+	}
+
 	calcBlock.addEventListener('input', e => {
 		if (e.target === calcType || e.target === calcSquare ||
 			e.target === calcCount || e.target === calcDay) {
 			countCalc()
+			animateValue(total, 0, total.textContent, 500)
 		}
 	})
 }
