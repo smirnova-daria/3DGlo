@@ -24,6 +24,11 @@ const validation = () => {
 			str = str.replace(/^-|-$/g, '')
 			str = str.trim()
 
+			if (!str) {
+				e.target.value = ''
+				return
+			}
+
 			if (e.target.type === 'text') {
 				str = str[0].toUpperCase() + str.substr(1).toLowerCase()
 			}
