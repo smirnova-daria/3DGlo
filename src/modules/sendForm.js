@@ -4,7 +4,8 @@ const sendForm = ({
 }) => {
 	const form = document.getElementById((formId))
 	const statusBlock = document.createElement('div')
-	const loadText = 'Загрузка...'
+
+	// const loadText = 'Загрузка...'
 	const errorText = 'Ошибка...'
 	const successText = 'Спасибо! Наш менеджер с вами свяжется'
 
@@ -47,7 +48,15 @@ const sendForm = ({
 		const formData = new FormData(form)
 		const formBody = {}
 
-		statusBlock.textContent = loadText
+		statusBlock.className = 'sk-circle-bounce'
+		let temp = ``
+		for (let i = 1; i <= 12; i++) {
+			temp += `		
+			<div class="sk-child sk-circle-${i}"></div>		
+		`
+		}
+		statusBlock.innerHTML = temp
+
 		form.append(statusBlock)
 
 		formData.forEach((val, key) => {
@@ -65,17 +74,22 @@ const sendForm = ({
 		if (validate(formElements)) {
 			sendData(formBody)
 				.then(data => {
-					statusBlock.textContent = successText
+					statusBlock.classList.remove('sk-circle-bounce')
+					statusBlock.innerHTML = `<img src="images/icons/success.svg" width='30px;'/> ${successText}`
 
 					formElements.forEach(input => {
 						input.value = ''
 					})
 				}).catch(error => {
-					statusBlock.textContent = errorText
+					statusBlock.innerHTML = ''
+					statusBlock.innerHTML = `<img src="images/icons/error.svg" width='30px;'/> ${errorText}`
 				})
 		} else {
-			statusBlock.textContent = errorText
-			alert('Данные не валидны')
+			statusBlock.classList.remove('sk-circle-bounce')
+			statusBlock.innerHTML = ''
+			statusBlock.innerHTML = `<img src="images/icons/error.svg" width='30px;'/> ${errorText}`
+
+			//	alert('Данные не валидны')
 		}
 	}
 
