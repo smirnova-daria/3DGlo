@@ -43,6 +43,22 @@ const sendForm = ({
 		}).then(res => res.json())
 	}
 
+	const showMessage = (status, message = '') => {
+		statusBlock.classList.remove('sk-circle-bounce')
+		statusBlock.style.color = '#fff'
+		statusBlock.innerHTML = ''
+
+		if (status === 'error') {
+			statusBlock.innerHTML = `<img src="images/icons/error.svg" width='30px;'/> ${errorText} ${message}`
+		} else if (status === 'success') {
+			statusBlock.innerHTML = `<img src="images/icons/success.svg" width='30px;'/> ${successText}`
+		}
+
+		setTimeout(() => {
+			statusBlock.remove()
+		}, 5000)
+	}
+
 	const submitForm = () => {
 		const formElements = form.querySelectorAll('input')
 		const formData = new FormData(form)
@@ -74,22 +90,16 @@ const sendForm = ({
 		if (validate(formElements)) {
 			sendData(formBody)
 				.then(data => {
-					statusBlock.classList.remove('sk-circle-bounce')
-					statusBlock.innerHTML = `<img src="images/icons/success.svg" width='30px;'/> ${successText}`
+					showMessage('success')
 
 					formElements.forEach(input => {
 						input.value = ''
 					})
 				}).catch(error => {
-					statusBlock.innerHTML = ''
-					statusBlock.innerHTML = `<img src="images/icons/error.svg" width='30px;'/> ${errorText}`
+					showMessage('error', 'Данные не удалось отправить')
 				})
 		} else {
-			statusBlock.classList.remove('sk-circle-bounce')
-			statusBlock.innerHTML = ''
-			statusBlock.innerHTML = `<img src="images/icons/error.svg" width='30px;'/> ${errorText}`
-
-			//	alert('Данные не валидны')
+			showMessage('error', 'Данные не валидны')
 		}
 	}
 

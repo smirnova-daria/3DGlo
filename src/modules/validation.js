@@ -37,8 +37,7 @@ const validation = () => {
 	}
 
 	mess.addEventListener('blur', (e) => {
-		changeStr(e, /[^а-яА-Я-\s]+/g)
-		///[^а-яА-Я\-\s]+/
+		changeStr(e, /[^а-яА-Я-\s0-9\(\)\.\,\:\"\!\?]+/g)
 	})
 
 	inputsName.forEach(input => {
