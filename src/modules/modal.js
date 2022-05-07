@@ -11,7 +11,7 @@ const modal = () => {
 		button.addEventListener('click', () => {
 			if (window.innerWidth > 768) {
 				modal.style.display = 'block'
-				modalContent.style.transform = 'translateX(100px)'
+				modalContent.style.transform = 'translateX(0)'
 
 				animate({
 					duration: 500,
